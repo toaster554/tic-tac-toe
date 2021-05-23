@@ -1,0 +1,37 @@
+#main-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-board {
+    display: grid;
+    width: 30vw;
+    height: 30vw;
+    background-color: black;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-gap: 1px;
+}
+
+.title {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.title:hover {
+    opacity: 0.8;
+}
+
+#scoreboard {
+    display: flex;
+    justify-content: space-between;
+    width: 20vw;
+}
+
+#current-player {
+    text-transform: uppercase;
+}
