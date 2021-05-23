@@ -36,21 +36,19 @@ const makeBoard = () => {
         return null;
     }
 
-    const resetBoard = () => {
-        titles = Array(3).fill().map(() => Array(3).fill(null));
-    }
+    // const resetBoard = () => {
+    //     titles = Array(3).fill().map(() => Array(3).fill(null));
+    // }
 
     return {
         titles,
-        setTitle,
-        resetBoard
+        setTitle
     };
 };
 
-const game = ((numRounds) => {
+const game = (() => {
     let board = makeBoard();
     let curSide = 'x';
-    let curRoundNum = 0;
     let numTitlesFilled = 0;
     let xScore = 0;
     let oScore = 0;
@@ -90,14 +88,14 @@ const game = ((numRounds) => {
             let scoreDisplay = document.querySelector(`#${winnerSide}-score`);
             scoreDisplay.innerHTML = (winnerSide === 'x') ? ++xScore : ++oScore;
         }
-        
 
-        if (++curRoundNum == numRounds) {
-            alert('Game Over!');
-            curRoundNum = 0;
-        }
+        newRound();
+    }
 
-        board.resetBoard();
+    const newRound = () => {
+        board = makeBoard();
+
+        numTitlesFilled = 0;
 
         let titleElements = document.querySelectorAll('.title');
         titleElements.forEach(title => title.innerHTML = '');
@@ -116,9 +114,12 @@ const game = ((numRounds) => {
 
             title.addEventListener('click', () => playMove(row, col));
         });
+
+        let resetBtn = document.querySelector('#reset-btn');
+        resetBtn.addEventListener('click', newRound);
     }
 
     return {setupGame};
-})(5);
+})();
 
 game.setupGame();
